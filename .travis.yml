@@ -9,14 +9,14 @@ script:
   - docker run kkarthik7/kk/react-test npm test -- --coverage
 
 after_success:
-  - docker build -t kkarthik7/kk/mclient ./client
-  - docker build -t kkarthik7/kk/mnginx ./nginx
-  - docker build -t kkarthik7/kk/mserver ./server
-  - docker build -t kkarthik7/kk/mworker ./worker
+  - docker build -t kkarthik7/mclient ./client
+  - docker build -t kkarthik7/mnginx ./nginx
+  - docker build -t kkarthik7/mserver ./server
+  - docker build -t kkarthik7/mworker ./worker
 
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
 
-  - docker push kkarthik7/kk/mclient
-  - docker push kkarthik7/kk/mnginx
-  - docker push kkarthik7/kk/mserver
-  - docker push kkarthik7/kk/mworker
+  - docker push kkarthik7/mclient
+  - docker push kkarthik7/mnginx
+  - docker push kkarthik7/mserver
+  - docker push kkarthik7/mworker
