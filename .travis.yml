@@ -1,0 +1,22 @@
+sudo: required
+services:
+  - docker
+
+before_install:
+  - docker build -t kk/react-test -f ./client/Dockerfile.dev
+
+script:
+  - docker run kk/react-test npm test -- --coverage
+
+after_success:
+  - docker build -t kk/mclient ./client
+  - docker build -t kk/mnginx ./nginx
+  - docker build -t kk/mserver ./server
+  - docker build -t kk/mworker ./worker
+
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+
+  - docker push kk/mclient
+  - docker push kk/mnginx
+  - docker push kk/mserver
+  - docker push kk/mworker
