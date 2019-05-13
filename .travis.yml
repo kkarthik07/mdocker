@@ -13,10 +13,8 @@ after_success:
   - docker build -t kkarthik7/mnginx ./nginx
   - docker build -t kkarthik7/mserver ./server
   - docker build -t kkarthik7/mworker ./worker
-
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
-
-  - docker push kkarthik7/mclient
   - docker push kkarthik7/mnginx
   - docker push kkarthik7/mserver
   - docker push kkarthik7/mworker
+  - docker push kkarthik7/mclient
